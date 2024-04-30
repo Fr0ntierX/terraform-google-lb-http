@@ -445,6 +445,10 @@ resource "google_compute_firewall" "default-hc" {
   target_tags             = length(var.target_tags) > 0 ? var.target_tags : null
   target_service_accounts = length(var.target_service_accounts) > 0 ? var.target_service_accounts : null
 
+  log_config {
+    metadata = "INCLUDE_ALL_METADATA"
+  }
+
   dynamic "allow" {
     for_each = local.health_checked_backends
     content {
